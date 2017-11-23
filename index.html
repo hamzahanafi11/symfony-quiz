@@ -5,145 +5,33 @@
     <link rel="stylesheet" type="text/css" href="css/starter.css">
     <link rel="stylesheet" type="text/css" href="css/bootsrap.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
-    
 </head>
 <body>
-
 	<div class="container">
         <div class="row">
-            <div class="intro">
-                <h2>Symfony 3.x quizz <i class="small" >Intermediate level</i></h2>
-                <p>This quizz evaluates your knowledge of the Symfony3 framework, It assess your ability to work on Symfony3 architecture as well as overriding the pre configured Symfony3 components to fit your needs during development from scratch.</p>
-                <p> Here is a brief list of what the questions are about : </p>
-                <ul class="preview" >
-                    <li>Controllers</li>
-                    <li>Services</li>
-                    <li>Dependency Injection</li>
-                    <li>Events</li>
-                    <li>Routing</li>
-                    <li>Twig</li>
-                    <li>Etc.</li>
-                </ul>
-                <br><br>
-                <p>felling confident ? so start the test now !!</p>
-                <p class="author" >made by <strong>name NAME</strong></p>
-                <button id="start" class="btn btn-success" > Start Quizz </button>
-            </div>
-            <div class="qcm col-md-12">
-                <div class="question animated">
-                    <h3>Question <span id="question-num" > 1 </span> </h3>
-                    <p id="question-text" >Question goes here :D</p>
-                </div>
-                <div class="choices animated">
-                    <!--
-                    <ul>
-                        <li>
-                            <input id="choice1" name="choice" type="radio"/>
-                            <label for="choice1" >choice 1</label>
-                        </li>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="intro">
+                    <h2>Symfony 3.x quizz <i class="small" >Intermediate level</i></h2>
+                    <p>This quizz evaluates your knowledge of the Symfony3 framework, It assess your ability to work on Symfony3 architecture as well as overriding the pre configured Symfony3 components to fit your needs during development from scratch.</p>
+                    <p> Here is a brief list of what the questions are about : </p>
+                    <ul class="preview" >
+                        <li>Controllers</li>
+                        <li>Services</li>
+                        <li>Dependency Injection</li>
+                        <li>Events</li>
+                        <li>Routing</li>
+                        <li>Twig</li>
+                        <li>Etc.</li>
                     </ul>
-                    -->
-                </div>
-                <div class="navigate">
-                    <button class="btn btn-success next">next</button>
-                    <button class="btn btn-success back">back</button>
+                    <br><br>
+                    <p>felling confident ? so start the test now !!</p>
+                    <p class="author" >created by <strong>Hamza HANAFI</strong></p>
+                    <a class="btn btn-success" href="./qcm.html">Start Quizz</a>
                 </div>
             </div>
         </div>
     </div>
-
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script>
-
-        var currentQuestion = 0; // we start from 0 by default :D
-
-        var qcm = [
-            {
-                "number" : 0,
-                "question" : "question 11111111111",
-                "choices" : [
-                    "choices 1",
-                    "choices 1"
-                ]
-            },{
-                "number" : 2,
-                "question" : "question 2222222222222",
-                "choices" : [
-                    "no stupid function",
-                    "very useful"
-                ]
-            },{
-                "number" : 3,
-                "question" : "question 33333333333333",
-                "choices" : [
-                    "yes go with twig",
-                    "yeah this is symofony"
-                ]
-            },{
-                "number" : 4,
-                "question" : "question 444444444444444",
-                "choices" : [
-                    "yes go with twig",
-                    "yeah this is symofony"
-                ]
-            }
-        ];
-
-        $('#start').on('click',function(){
-            $(".intro").fadeOut();
-            $(this).remove();
-            $('.qcm').fadeIn();
-            render(currentQuestion);
-            $('.navigate').addClass('animated zoomIn');
-        });
-
-        $('.next').on('click',function(){
-            if(currentQuestion < qcm.length -1 )
-                render(++currentQuestion);
-            else {
-                console.log('this is the last question click finish');
-            }
-        });
-
-        $('.back').on('click',function(){
-            if(currentQuestion > 0 )
-                render(--currentQuestion);
-            else {
-                console.log('this is the first');
-            }
-        });
-
-
-        function render(index){
-            console.log(index);
-            var number   = qcm[index].number;
-            var question = qcm[index].question;
-            var choices  = qcm[index].choices;
-            var $ul      = $('<ul></ul>');
-            choices.forEach(function (el) {
-                var $label = $('<label for="choice'+ el.index +'" >'+ el +'</label>');
-                var $input = $('<input id="choice'+ el.index +'" name="choice" type="radio"/>');
-                var $li    = $('<li></li>');
-                $li.append($input);
-                $li.append($label);
-                $ul.append($li);
-            });
-            if($('.question').hasClass('zoomIn')){
-                $('.question').removeClass('zoomIn');
-            }
-            $('.question').addClass('zoomOut');
-            $('.question').one('webkitAnimationEnd', function () {
-                $('#question-num').text(number);
-                $('#question-text').text(question);
-                $('.choices').html($ul);
-                $('.question').removeClass('zoomOut');
-                $('.question').addClass('zoomIn');
-                $('.choices').removeClass('zoomOut');
-                $('.choices').addClass('zoomIn');
-            });
-        }
-    </script>
 </body>
 </html>

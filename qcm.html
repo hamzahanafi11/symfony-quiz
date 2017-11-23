@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Symfony quizz</title>
+    <link rel="stylesheet" type="text/css" href="css/starter.css">
+    <link rel="stylesheet" type="text/css" href="css/bootsrap.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    
+</head>
+<body>
+
+	<div class="container">
+        <div class="row">
+            <div class="qcm col-md-8 col-md-offset-2">
+                <div class="question animated">
+                    <h3>Question <span id="question-num" ><!-- 1 --></span> </h3>
+                    <p id="question-text" ><!-- Question goes here :D --></p>
+                </div>
+                <div class="choices animated">
+                    <!--
+                    <ul>
+                        <li>
+                            <input id="choice1" name="choice" type="radio"/>
+                            <label for="choice1" >choice 1</label>
+                        </li>
+                    </ul>
+                    -->
+                </div>
+                <div class="navigate">
+                    <button class="btn btn-success next">next</button>
+                    <button class="btn btn-success back">back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script>
+        var currentQuestion = 0;
+        var responses = [];
+        var qcm = [
+            {
+                "number" : 0,
+                "question" : "question 11111111111",
+                "choices" : [
+                    { "choice" : "choices 1", "index" : 1},
+                    { "choice" : "choices 2", "index" : 2}
+                ]
+            },{
+                "number" : 2,
+                "question" : "question 2222222222222",
+                "choices" : [
+                    { "choice" : "no stupid function", "index" : 1},
+                    { "choice" : "very useful", "index" : 2}
+                ]
+            },{
+                "number" : 3,
+                "question" : "question 33333333333333",
+                "choices" : [
+                    { "choice" : "bkllaasase", "index" : 1},
+                    { "choice" : "dadadada", "index" : 2},
+                    { "choice" : "yeah this is symofony", "index" : 3}
+                ]
+            }
+        ];
+
+        /*$('#start').on('click',function(){
+            $(".intro").fadeOut();
+            $(this).remove();
+            $('.qcm').fadeIn();
+            
+            $('.navigate').addClass('animated zoomIn');
+        });*/
+
+        $(document).ready(function(){
+            render(currentQuestion);
+            $('.qcm').fadeIn();
+            $('.navigate').addClass('animated zoomIn');
+        });
+
+        $('.next').on('click',function(){
+            if(currentQuestion < qcm.length -1 )
+                render(++currentQuestion);
+            if (currentQuestion === qcm.length -1 ){
+                endQuizz($(this));
+            }
+        });
+
+
+        $('.back').on('click',function(){
+            if($('.next').attr('id') !== undefined )
+                resetNextBtn();
+            if(currentQuestion > 0 )
+                render(--currentQuestion);
+            else {
+                console.log('this is the first question');
+            }
+        });
+
+        $('#finish-quizz').on('click',function () {
+            $.ajax({
+                'url'    : '/quizz/results',
+                'method' : 'POST',
+                'data'  : {
+                    'responses' : responses
+                },
+                success:function (res) {
+                    console.log(res);
+                },
+                error:function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        function endQuizz(el){
+            el.attr('id','finish-quizz');
+            el.removeClass('btn-success');
+            el.addClass('btn-warning');
+            el.text('finish');
+        }
+
+        function resetNextBtn()
+        {
+            $('.next').removeAttr('id');
+            $('.next').removeClass('btn-warning');
+            $('.next').addClass('btn-success');
+            $('.next').text('next');
+        }
+
+
+        function render(index){
+            console.log(index);
+            var number   = qcm[index].number;
+            var question = qcm[index].question;
+            var choices  = qcm[index].choices;
+            var $ul      = $('<ul></ul>');
+            choices.forEach(function (el) {
+                var $label = $('<label for="choice'+ el.index +'" >'+ el.choice +'</label>');
+                var $input = $('<input class="choice" id="choice'+ el.index +'" name="choice" type="radio"/>');
+                var $li    = $('<li></li>');
+                $li.append($input);
+                $li.append($label);
+                $ul.append($li);
+            });
+            $('.question, .choices').addClass('zoomOut');
+            $('.question').one('webkitAnimationEnd', function () {
+                $('#question-num').text(number);
+                $('#question-text').text(question);
+                $('.choices').html($ul);
+                $('.question, .choices ').removeClass('zoomOut');
+                $('.question, .choices').addClass('zoomIn');
+            });
+        }
+
+        $(document.body).on('click','.choice',function(){
+            var id = $(this).attr('id');
+            responses[currentQuestion] = {
+                "question-num" : currentQuestion,
+                "response"     : id
+            };
+        });
+    </script>
+</body>
+</html>
