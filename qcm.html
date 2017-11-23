@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Symfony quizz</title>
+	<title>Symfony quiz by Hamza HANAFI</title>
     <link rel="stylesheet" type="text/css" href="css/starter.css">
     <link rel="stylesheet" type="text/css" href="css/bootsrap.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -75,7 +75,7 @@
             if(currentQuestion < qcm.length -1 )
                 render(++currentQuestion);
             if (currentQuestion === qcm.length -1 ){
-                endQuizz($(this));
+                endquiz($(this));
             }
         });
 
@@ -97,7 +97,7 @@
                 "response"     : id               // choice1
             };
         });
-        
+
         $(document.body).on('click','li',function () {
             var $radioBtn = $(this).children().find('input')
             var id = $radioBtn.attr('id');
@@ -108,15 +108,18 @@
             };
         });
 
-        $(document.body).one('click','#finish-quizz',function () {
+        $(document.body).one('click','#finish-quiz',function () {
             $.ajax({
-                'url'    : '/quizz/results',
+                'url'    : 'http://localhost/test/test.php',
                 'method' : 'POST',
                 'data'  : {
                     'responses' : responses
                 },
                 success:function (res) {
-                    console.log(res.note);
+                    console.log(res);
+                    $('.qcm').html("");
+                    $p = $('<div class="jumbotron res"><p> Your score is : ' + res + '/20</p></div>');
+                    $('.qcm').append($p);
                 },
                 error:function (err) {
                     console.log(err);
@@ -124,9 +127,9 @@
             });
         });
 
-        function endQuizz(el){
+        function endquiz(el){
             setTimeout(function () {
-                el.attr('id','finish-quizz');
+                el.attr('id','finish-quiz');
                 el.removeClass('btn-success');
                 el.addClass('btn-warning');
                 el.text('finish');
