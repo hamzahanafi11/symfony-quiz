@@ -138,10 +138,11 @@
             var choices  = qcm[index].choices;
             var $ul      = $('<ul></ul>');
             choices.forEach(function (el) {
-                var $label = $('<label for="choice'+ el.index +'" >'+ el.choice +'</label>');
+                var $label = $('<label for="choice'+ el.index +'" ></label>');
                 var $input = $('<input class="choice" id="choice'+ el.index +'" name="choice" type="radio"/>');
                 var $li    = $('<li></li>');
-                $li.append($input);
+                $label.append($input);
+                $label.append(el.choice);
                 $li.append($label);
                 $ul.append($li);
             });
