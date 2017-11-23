@@ -97,6 +97,16 @@
                 "response"     : id               // choice1
             };
         });
+        
+        $(document.body).on('click','li',function () {
+            var $radioBtn = $(this).children().find('input')
+            var id = $radioBtn.attr('id');
+            $radioBtn.prop('checked',true);
+            responses[currentQuestion] = {
+                "questionNum" : currentQuestion,  // 0
+                "response"     : id               // choice1
+            };
+        });
 
         $(document.body).one('click','#finish-quizz',function () {
             $.ajax({
