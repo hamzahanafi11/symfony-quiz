@@ -14,7 +14,7 @@
             <div class="qcm col-md-8 col-md-offset-2">
                 <div class="question animated">
                     <h3>Question <span id="question-num" ><!-- 1 --></span> </h3>
-                    <pre id="question-text" ><!--Question goes here :D--></pre>
+                    <pre class="pre-question" id="question-text" ><!--Question goes here :D--></pre>
 
                 </div>
                 <div class="choices animated">
@@ -379,12 +379,14 @@
             var choices  = qcm[index].choices;
             var $ul      = $('<ul></ul>');
             choices.forEach(function (el) {
-                var $label = $('<label for="choice'+ el.index +'" ></label>');
+                var $label = $('<label class="lbl-question" for="choice'+ el.index +'" ></label>');
                 var $input = $('<input class="choice" id="choice'+ el.index +'" name="choice" type="radio"/>');
                 var $li    = $('<li></li>');
+                var $pre   = $('<pre class="pre-choice"></pre>');
                 $label.append($input);
                 $label.append(el.choice);
-                $li.append($label);
+                $pre.append($label);
+                $li.append($pre);
                 $ul.append($li);
             });
             $('.question, .choices').addClass('zoomOut');

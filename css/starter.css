@@ -28,7 +28,7 @@ ul{
     float: right;
 }
 .navigate{
-
+    margin-bottom: 35px;
 }
 .qcm{
     margin-top: 35px;
@@ -63,17 +63,20 @@ input[type="radio"]{
 .res{
     text-align: center;
 }
-pre{
-    display: block!important;
+.pre-question{
     font-family: sans-serif!important;
-    padding: 9.5px!important;
-    margin: 0 0 10px!important;
     font-size: 15px!important;
-    line-height: 1.42857143!important;
     color: #333!important;
-    word-break: break-all!important;
-    word-wrap: break-word!important;
     background-color: #65b6f3!important;
     border: 1px solid #65b6f3!important;
-    border-radius: 4px!important;
+}
+.pre-choice{
+    font-family: sans-serif!important;
+    font-size: 15px!important;
+    color: #333!important;
+    background-color: #8aa0b1!important;
+    border: 1px solid #8aa0b1!important;
+}
+.lbl-question{
+    display: inline-flex;
 }
