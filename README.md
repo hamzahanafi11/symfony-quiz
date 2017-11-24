@@ -1,4 +1,4 @@
-# symfony-quizz
+# symfony-quiz
 
 This quiz evaluates your knowledge of the Symfony3 framework, It assess your ability to work on Symfony3 architecture as well as overriding the pre configured Symfony3 components to fit your needs during development from scratch.
 
