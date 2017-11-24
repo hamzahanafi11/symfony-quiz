@@ -50,6 +50,7 @@ ul.preview {
     margin: 35px 20px;
     padding: 15px 25px;
     border-radius: 3px;
+    box-shadow: 0px 0px 25px #888888;
 }
 .small{
     font-size: small;
