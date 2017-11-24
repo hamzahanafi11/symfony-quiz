@@ -13,7 +13,6 @@
                 <div class="question animated">
                     <h3>Question <span id="question-num" ><!-- Question num goes here --></span> </h3>
                     <pre class="pre-question" id="question-text" ><!--Question goes here :D--></pre>
-
                 </div>
                 <div class="choices animated">
                     <!-- choices go here -->
@@ -47,7 +46,6 @@
             }
         });
 
-
         $('.back').on('click',function(){
             if($('.next').attr('id') !== undefined )
                 resetNextBtn();
@@ -77,7 +75,7 @@
         });
 
         $(document.body).one('click','#finish-quiz',function () {
-            $.ajax({
+            /*$.ajax({
                 'url'    : 'https://cors.io/?http://hamza-hanafi.site/githubsmf.php',
                 'method' : 'POST',
                 'data'  : {
@@ -92,7 +90,33 @@
                 error:function (err) {
                     console.log(err);
                 }
-            });
+            });*/
+            var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+			function doCORSRequest(options, printResult) {
+				var x = new XMLHttpRequest();
+				x.open(options.method, cors_api_url + options.url);
+				x.onload = x.onerror = function() {
+					printResult(
+						options.method + ' ' + options.url + '\n' +
+						x.status + ' ' + x.statusText + '\n\n' +
+						(x.responseText || '')
+					);
+				};
+				if (/^POST/i.test(options.method)) {
+					x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				}
+				x.send(options.data);
+			}
+			doCORSRequest({
+				method: 'POST',
+				url: 'hamza-hanafi.site/githubsmf.php',
+				data: responses
+			},function printResult(res) {
+				var note = res.substr(res.lastIndexOf("\n")+1);
+				$('.qcm').html("");
+                $p = $('<div class="jumbotron res"><p> Your score is : ' + note + '/20</p></div>');
+                $('.qcm').append($p);
+			});
         });
 
         function endquiz(el){
