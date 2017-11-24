@@ -75,22 +75,6 @@
         });
 
         $(document.body).one('click','#finish-quiz',function () {
-            /*$.ajax({
-                'url'    : 'https://cors.io/?http://hamza-hanafi.site/githubsmf.php',
-                'method' : 'POST',
-                'data'  : {
-                    'responses' : responses
-                },
-                success:function (res) {
-                    console.log(res);
-                    $('.qcm').html("");
-                    $p = $('<div class="jumbotron res"><p> Your score is : ' + res + '/20</p></div>');
-                    $('.qcm').append($p);
-                },
-                error:function (err) {
-                    console.log(err);
-                }
-            });*/
             var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 			function doCORSRequest(options, printResult) {
 				var x = new XMLHttpRequest();
