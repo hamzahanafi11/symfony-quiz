@@ -4,28 +4,19 @@
 	<title>Symfony quiz by Hamza HANAFI</title>
     <link rel="stylesheet" type="text/css" href="css/starter.css">
     <link rel="stylesheet" type="text/css" href="css/bootsrap.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    
+    <link rel="stylesheet" type="text/css" href="css/animate.css">  
 </head>
 <body>
-
 	<div class="container">
         <div class="row">
             <div class="qcm col-md-8 col-md-offset-2">
                 <div class="question animated">
-                    <h3>Question <span id="question-num" ><!-- 1 --></span> </h3>
+                    <h3>Question <span id="question-num" ><!-- Question num goes here --></span> </h3>
                     <pre class="pre-question" id="question-text" ><!--Question goes here :D--></pre>
 
                 </div>
                 <div class="choices animated">
-                    <!--
-                    <ul>
-                        <li>
-                            <input id="choice1" name="choice" type="radio"/>
-                            <label for="choice1" >choice 1</label>
-                        </li>
-                    </ul>
-                    -->
+                    <!-- choices go here -->
                 </div>
                 <div class="navigate">
                     <button class="btn btn-success next">next</button>
@@ -70,8 +61,8 @@
         $(document.body).on('click','.choice',function(){
             var id = $(this).attr('id');
             responses[currentQuestion] = {
-                "questionNum" : currentQuestion,  // 0
-                "response"     : id               // choice1
+                "questionNum" : currentQuestion,
+                "response"     : id
             };
         });
 
@@ -80,8 +71,8 @@
             var id = $radioBtn.attr('id');
             $radioBtn.prop('checked',true);
             responses[currentQuestion] = {
-                "questionNum" : currentQuestion,  // 0
-                "response"     : id               // choice1
+                "questionNum" : currentQuestion,
+                "response"     : id
             };
         });
 
