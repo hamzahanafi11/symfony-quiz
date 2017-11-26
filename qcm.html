@@ -91,10 +91,21 @@
 				}
 				x.send(options.data);
 			}
+			var resp = [];
+			for(var i = 0; i<20;i++){
+			    var el = responses[i];
+			    if(el != undefined)
+			        resp.push(el.questionNum+"="+el.response);
+			    else
+			        resp.push(i+"=null")
+			}
+			var myData =  = resp.map(function(el){
+			    return el;
+			}).join('&');
 			doCORSRequest({
-				method: 'POST',
-				url: 'hamza-hanafi.site/my-github-services/githubsmf.php',
-				data: responses
+				method: 'GET',
+				url: 'hamza-hanafi.site/my-github-services/githubsmf.php?'+myData,
+				//data: responses
 			},function printResult(res) {
 				var note = res.substr(res.lastIndexOf("\n")+1);
 				$('.qcm').html("");
