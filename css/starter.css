@@ -42,6 +42,7 @@ ul{
 .author p a{
     text-decoration: none;
     cursor: pointer;
+    color: #1d5280;
 }
 .author p a:hover{
     color: #073358;
