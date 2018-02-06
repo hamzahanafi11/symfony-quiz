@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Symfony quiz by Hamza HANAFI</title>
+    <title>Symfony quiz by Hamza HANAFI</title>
     <link rel="stylesheet" type="text/css" href="css/starter.css">
     <link rel="stylesheet" type="text/css" href="css/bootsrap.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">  
@@ -105,7 +105,6 @@
 			doCORSRequest({
 				method: 'GET',
 				url: 'hamza-hanafi.site/my-github-services/githubsmf.php?'+myData,
-				//data: responses
 			},function printResult(res) {
 				var note = res.substr(res.lastIndexOf("\n")+1);
 				$('.qcm').html("");
